@@ -8,7 +8,7 @@ module.exports = (windowSize, maxRequests) => {
 
     const pipeline = redis.pipeline();
     pipeline.zremrangebyscore(key, 0, windowStart);
-    pineline.zcard(key);
+    pipeline.zcard(key);
     pipeline.expire(key, Math.ceil(windowSize / 1000));
 
     const results = await pipeline.exec();

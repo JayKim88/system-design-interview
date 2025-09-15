@@ -11,7 +11,7 @@ class TokenBucket {
     const bucketKey = `bucket:${key}`;
     const now = Date.now();
 
-    const bucket = await redis.hmget(bucketKey, "token", "lastRefill");
+    const bucket = await redis.hmget(bucketKey, "tokens", "lastRefill");
     let tokens = parseFloat(bucket[0]) || this.capacity;
     let lastRefill = parseInt(bucket[1]) || now;
 
@@ -31,7 +31,7 @@ class TokenBucket {
   }
 }
 
-MediaSourceHandle.exports = (capacity, refillRate) => {
+module.exports = (capacity, refillRate) => {
   const bucket = new TokenBucket(capacity, refillRate);
 
   return async (req, res, next) => {

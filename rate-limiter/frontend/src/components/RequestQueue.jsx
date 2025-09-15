@@ -1,5 +1,4 @@
 import React from "react";
-import { request } from "../../../backend/src/app";
 
 const RequestQueue = ({ requests }) => {
   return (
